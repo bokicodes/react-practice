@@ -1,0 +1,40 @@
+windows dot -> za pisanje emoji-a
+
+--- const optionsArr = Array.from({ length: 20 }, (_, i) => i + 1);
+// dakle pravi niz duzine 20, a drugi parametar mu dajemo da ide od i+1 (posto inace bi isao od 0 do 19) tako da imace elemente od 1 do 20, malo cudno al eto mozes da upamtis da postoji ova fora, znaci bukvalno smo napravili niz od 20 elemenata, od 1 do 20
+
+Kada koristis e.preventDefault to e ne moras da saljes, salje se automatski, samo moras da primis to e naravno da bi mogao da ga u funkciji koristis
+
+
+# Controlled Elements #
+
+- Select i input polja, cuvaju svoj state u DOMu (html elementu), i onda je tesko da procitamo tu vrednost, mozemo tipa e.target.input.value ili tako nesto ali cimanje
+
+- U React-u se ovo resava koriscenjem tehnike "controlled elements" - react cuva state o ovim podacima a ne DOM. Ovo se najvise radi za forme, za ta input select polja itd
+
+1. Napravis state
+2. Koristimo state varijablu kao value za input field forme
+- sada nece moci da se menja input field
+3. Na isti element (input) slusamo onChange event gde koristimo state funkciju i stavljamo e.target.value
+- ovo je two way data ili tako nesto se zove
+- i sada react kontrolise state tih podataka
+
+
+# State vs Props #
+
+- State sluzi da cuvamo neko stanje, neke podatke komponente cija promena treba da izmeni i UI dok props sluze da parent komponenta moze da posalje child komponenti odredjene podatke koje zeli da child komponenta koristi, tako utice na nju.
+
+- Props je external data, data owned by the parent component
+State is internal data owned by the component
+
+- Props are similar to function parameters
+State is like component memory
+
+- Props are read-only - komponenta koja prima props ne moze da ih promeni !!! (ovo nisi znao)
+Komponenta moze da menja svoj state, sto ce trigerovati re-render komponente
+
+*** Primanje novih propova ce takodje RE-RENDEROVATI komponentu !!! To je uglavnom kad se parent state updejtuje pa se onda re-renderuje parent i samim tim drugaciji propovi se posalju child komponenti pa ce se i ona re-renderovati! ***
+Ovo je i logicno jer u parent komponenti se renderuje child komponenta, pa kad se re-renderuje parent onda ce re-renderovati i child sa novim propovima
+
+
+75. video
