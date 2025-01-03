@@ -1,0 +1,58 @@
+# Events
+
+- onClick, onMouseEnter etc etc
+- Primaju callback functions, inace ako stavis () kao poziv odma ce se izvrsiti cim se inicijalizuje komponenta, a ne zelis to, zelis da se funkcija registruje i tek na taj event da se pozove (na klik 
+recimo)
+
+
+# States 
+
+- Implementira se pomocu hooka useState()
+
+- Data that component can hold over time, necessary for information that component needs to remember throughout the app's lifecycle ("components memory")
+
+- Piece of state - single variable that holds the state, "state variable"
+
+* Updating state, triggers React to RE-RENDER the component !!!
+
+- Znaci dve najbitnije stvari koje nam omogucava su:
+1. Da updejtujemo component na osnovu promene nekih podataka
+2. Da zadrzimo (persist) lokalne promenljive izmedju renderovanja
+
+- Vraca NIZ !!! -> bukvalno mozes da storujes niz i da console logujes.
+Ima dve vrednosti
+0: initial value
+1: function
+- Jedino function moze da promeni vrednost prvog elementa.
+
+- useState() hook mora da se definise na samom vrhu funkciju! Nigde drugde, ne moze u if-u ili bilo gde, mora na top levelu od function component.
+
+- State nikad ne treba da menjas manuelno, zato je dobra praksa da se definise sa const, jer ako bi sa let onda bi mogao da promenis bez funkcije ali to ne bi radilo, React ne zna da zelis da promenis state, nego samo reaguje na tu funkciju koja je drugi element niza.
+
+- State uvek treba da bude immmutable, odnosno, ako tipa state ti je neki objekat i zelis da updejtujes state, BAD PRACTICE bi bio da ti promenis obj.name = "novo ime", iako ce ovo da radi, u nekim kompleksnim slucajevima nece i generalno je losa praksa, znaci varijablu posmatras kao immutable, i onda bi ovde GOOD PRACTICE bio da uzmes i uradis setObj({name: "novo ime"}) znaci novi objekat si dodelio promenljivoj.
+
+- Znaci ne diramo dom direktno kada menjamo UI, nego promenimo state i onda se komponent function opet pozove odnosno re-renderuje se komponenta
+
+- Cim se nesto na ekranu menja, to je uglavnom state 
+
+- {} moze samo unutar nekako html-a ne moze samo return {...} cisto da znas
+
+---- skini react chrome dev tools (za google chrome, a ima i za druge) i onda kad ides desni klik inspect mozes da koristis to, mozes da vidis za svaku komponentu props, state, da menjas state kao test itd bas korisno
+
+# Updating state based on a current (previous) state
+- U ovoj situaciji najbolji nacin je da prosledis callback function koja kao argument prima prevState (mozes da ga nazoves kako god to ce da bude state promenljiva automatski) i onda updejtuje, nego direktno da menjas vrednost sa state promenljivom. Zasto? U detalje kasnije ali u sustini, ako uradis na stari nacin, radice lepo ako samo jednom menjas ali recimo da dvaput pozivas state funkciju ocekivaces da ce druga da radi na osnovu prve ali zapravo nece i imaces neocekivano ponasanje, zato je mnogo sigurnije da koristis callback (i za to a i u timu kad radis) jer ce tad imati ocekivano ponasanje (kasnije detaljno zasto).
+
+
+# State guidlines
+
+- Each component has its own state, multiple same comopnents have their own ISOLATED state, they don't affect each other.
+
+- UI -> dodje kao reprezentacija state-a u svim komponentima
+
+1. Create new state for any data that component should track over time
+2. Kad god hoces da nesto bude dynamic, napravi state za to (npr modal window koji moze biti open ili closed)
+3. Za podatke koji ne trebaju da re-renderuju komponente, ne koristi state. Za njih koristi obicne promenljive let,const
+
+
+--- moze i da se chainuje ternarni operator condition ? true : condition ? true : condition ? true : false
+ali meni je vise readable short circuiting u tom slucaju
