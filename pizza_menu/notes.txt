@@ -1,0 +1,95 @@
+# Components
+
+React je component based, znaci sve su neke komponente uglavnom, komponenta u komponenti itd
+
+Component - piece of the user interface that is reusable, encapsulated, extracted away (moj definicija)
+
+Mogu da budu nested (parent component and child component), da salju podatke jedan drugom
+
+To je funkcija, mora da pocinje velikim slovom i mora da vraca neki markup !!!
+
+--- otisao je settings -> diff decorations -> none (msm da je to za git ali msm da mi ne treba ovo za firmin laptop, nadam se msm, nikakav git necu tu da imam tako da ako imas ti uzmi pa vidi zasto i kako da izbrises to) ---
+
+- Inace componenta je funkcija ali mozes i kao arrow func ili func expression da pises, kao i svaka funkcija, export samo ako je u drugom fajlu ako nije ne mora to
+
+
+# JSX
+
+- Declerative syntax used to describe what components look like and how they work
+
+- Components must return block of JSX
+- Mozes da kombinujes html,css,js u jedan blok koda koji se naziva jsx
+
+- Babel konvertuje JSX u JS i html da bi js moglo da se izvrsi u browseru (jer jsx ne moze). Automatski importovan Babel kada smo napravili npx create-react-app
+
+- Imperative -> manually select elemnts, travers a dom, mutate dom elements itd (znaci step by step, kazemo browseru sta da radi)
+
+- Delcaritve (JSX) -> mi pisemo nesto ali kako ce browser to da uradi to ne vidimo, to se radi behind the scenes
+
+- {javacript} van toga je html , unutar {} moze bilo sta sto vraca vrednost, znaci bilo koji expression, ternarni operator, map(), sta god
+
+- className umesto class, htmlFor umesto for, svaki tag mora da se zatvori, css inline styles se pisu {{color:red;}}, komentari se pisu unutar {}
+
+# Styling
+
+- Ima vise nacina, inline css, external css, styling framework etc
+
+- Za external napravis obican css i moras da importujes u js/jsx fajl gde ti je komponenta i ono se primeni automatski (webpack to resava behind the scenes)
+
+# Props
+
+- how we send the data from parent component to child component
+- parametri komponente
+- objekat sa parametrima, key value pairs gde je key naziv parametra a value vrednost
+
+- Moze svasta da se prosledi sa props, ne samo vrednosti nego i funkcije, komponente (sto su opet vrednosti, func = vrednost u JSu, komponente = func u react-u :D ), nizove, objekte (znaci bilo koja vrednost i expression)
+
+--- inace mnogo mi bolje radi intelisense, vrv zbog one ekstenzije sto sam skinuo ali svakako vidi ako na firminom ne radi nesto prekopiraj sve ekstenzije, imas i onu auto close tag i auto rename sto pomaze---
+
+* Props are READ-ONLY!
+
+Data: props and state
+State is internal component data that can be updated by component logic
+Props is data that comes from the parent component, from the outside, therefore cant be modified by child component but only by parent component
+
+PROPS are immutable -> they are read only!
+
+If you ened to mutate props, you actually need STATE!
+Why?
+
+Props je objekat, ako promenis u child componenti, promenice se i originalan objekat (referenca) i onda pravi side-effect (pamtis ono za funkcije), a react treba da bude pure functions!
+
+Component should never mutate any data that we write outside of it's function scope!
+
+ONE-WAY data flow -> data can only be passed from parent to child components, by using props. Ne moze u obrnutom smeru, zato je one way data flow. From top to bottom.
+Angular npr moze two way data flow, react ne.
+
+- App je vise predictable tako, znas odakle dolazi data, lakse za debagovanje
+
+- Sta ako zelis da prebacis data ili state iz child-a u parent? Postoji pametan nacin da se ovo resi ali kasnije to.
+
+--- za challenges koristi sandbox jer nesto mi nece kada sandbox skinem lokalno, mozes i lokalno da napravis projekat iz pocetka pa da kopiras fajlove ---
+
+
+---------------
+
+- Naravno mozemo da renderujemo nesto kondicionalno, koristeci short circuiting operators kao sto su
+{condition && displayThis}
+{condition || dispalyThis}
+ili ternarni operator
+{condition ? true : false}
+ Ali za renderovanje, bitno je da znas da JSX mora da vrati neku vrednost, zato ne moze tipa if-else mislim moze ali moras return da imas unutra, ternarni odma vraca vrednost zato ne mora return 
+
+- Mozes da imas vise returna u komponenti ali normalno mora na osnovu nekog uslova, da se returnovi ne poklapaju
+
+- <> </> fragment se ne renderuje na dom-u, nema ga, tako da je odlican za vracanje kad imas vise elementa da vratis a ne treba ti div
+Nekada se pisao <React.Fragment></React.Fragment> ali sada ne mora tako
+
+- Ovako kondiciono stavljas klasu za stajling (ovo te bunilo pre):
+<li className={`pizza ${pizzaObj.soldOut ? "sold-out" : undefined}`}>
+znaci da bi pisao ternrni operator moras da udjes u javascript mode a to radis sa {} tako da ide to a unutra template literals {`class ${class}`}
+
+
+- Za renderovanje liste necega maltane uvek se koristi .map() jer vraca novi niz i onda jsx renderuje to
+
+- Cim napravis komponentu idi odma return jer desi ti se da zaboravis return i onda 5 min dok skontas zasto ti se ne prikazuje...
